@@ -13,7 +13,7 @@ import random
 
 
 #Code for reading the book.txt into python
-filepath = "/home/np/GitHub/csc113-wordfreq-chunyuyuan/book.txt" #/home/np/GitHub/csc113-wordfreq-chunyuyuan/book.txt
+filepath = "/home/np/GitHub/csc113-wordfreq-chunyuyuan/book.txt" #These file paths are specific to my local instance, either set it to your filepaths or find a way to have a relative path to the project.
 out_filepath = "/home/np/GitHub/csc113-wordfreq-chunyuyuan/output.txt"
 word_count = {}
 
