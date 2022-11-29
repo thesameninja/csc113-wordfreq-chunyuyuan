@@ -13,8 +13,8 @@ import random
 
 
 #Code for reading the book.txt into python
-filepath = "/home/np/GitHub/csc113-wordfreq-chunyuyuan/book.txt" #These file paths are specific to my local instance, either set it to your filepaths or find a way to have a relative path to the project.
-out_filepath = "/home/np/GitHub/csc113-wordfreq-chunyuyuan/output.txt"
+filepath = "./book.txt" 
+out_filepath = "./output.txt"
 word_count = {}
 
 
@@ -56,7 +56,7 @@ top_words = ordered_dict_by_freq(word_count)
 for tuple_freq in top_words:
     count, word = tuple_freq
     with open("output.txt", "a") as f:
-        print("{0:20}{1:8d}".format(word, count),file=f)
+        print("{0:30}{1:8d}".format(word, count),file=f)
 
 
 #Other team members can work here - Sohail>>> 
