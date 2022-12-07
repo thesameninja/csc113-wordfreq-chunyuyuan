@@ -1,4 +1,5 @@
 import string
+import threading
 import time
 import os
 import random
@@ -29,14 +30,15 @@ def remove_punctuations(line):
 def ordered_dict_by_freq(dictionary):
     sorted_values = []
     for key in dictionary:
-        sorted_values.append((dictionary[key],key))
-    sorted_values = sorted(sorted_values)
+        while not ((len(key) < 2 and (key != 'a'))
+            sorted_values.append((dictionary[key],key))
+            sorted_values = sorted(sorted_values)
 
     sorted_values = sorted_values[::-1]
     return sorted_values
 
 
-#using filepath to acces file, removing punctuations, 
+#using filepath to access file, removing punctuations, 
 with open(filepath, 'r') as fi:
     for line in fi:
         line = remove_punctuations(line)
@@ -63,4 +65,6 @@ for tuple_freq in top_words:
 #You guys can start adding your code, we need to figure out multi-threading/processing
 #implement a way to then measure the time taken for the program to run for each specification.
 #-Sohail Ahmad 11/27/2022
+
+
 
