@@ -25,6 +25,11 @@ def remove_punctuations(line):
         line = line.replace(character, "")
     return line
 
+#function to remove the numbers
+def remove_numbers(line):
+    for integer in string.punctuation:
+        line = line.remove(integer)
+    return line
 
 #sorting the dictionary with tuple, then reversing the tuplef to get top to bottom.
 def ordered_dict_by_freq(dictionary):
@@ -41,6 +46,7 @@ def ordered_dict_by_freq(dictionary):
 with open(filepath, 'r') as fi:
     for line in fi:
         line = remove_punctuations(line)
+        line = remove_numbers(line)
         words = line.split()
 
         for words in words:
