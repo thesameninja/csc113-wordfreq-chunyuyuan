@@ -27,9 +27,9 @@ def remove_punctuations(line):
 
 #function to remove the numbers
 def remove_numbers(line):
-    for integer in string.punctuation:
-        line = line.remove(integer)
+    line = ''.join((x for x in line if not x.isdigit()))
     return line
+
 
 #sorting the dictionary with tuple, then reversing the tuplef to get top to bottom.
 def ordered_dict_by_freq(dictionary):
