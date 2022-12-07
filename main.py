@@ -30,9 +30,8 @@ def remove_punctuations(line):
 def ordered_dict_by_freq(dictionary):
     sorted_values = []
     for key in dictionary:
-        while not ((len(key) < 2 and (key != 'a'))
-            sorted_values.append((dictionary[key],key))
-            sorted_values = sorted(sorted_values)
+        sorted_values.append((dictionary[key],key))
+        sorted_values = sorted(sorted_values)
 
     sorted_values = sorted_values[::-1]
     return sorted_values
