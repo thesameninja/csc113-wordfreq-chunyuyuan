@@ -63,3 +63,8 @@ for tuple_freq in top_words:
 #You guys can start adding your code, we need to figure out multi-threading/processing
 #implement a way to then measure the time taken for the program to run for each specification.
 #-Sohail Ahmad 11/27/2022
+
+#function to determine how long it takes to run the program
+start_time = time.time()
+main()
+print("--- %s seconds ---" % (time.time() - start_time))
