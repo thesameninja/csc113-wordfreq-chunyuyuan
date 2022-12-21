@@ -1,37 +1,19 @@
 import string
-import threading
+import multiprocessing
 import time
-import os
-import random
 
-
-#Useful links for you guys: 
-#https://www.geeksforgeeks.org/with-statement-in-python/
-#https://www.w3schools.com/python/python_dictionaries.asp
-#https://www.w3schools.com/python/python_tuples.asp
-
-#-Sohail Ahmad
-
-
-#Code for reading the book.txt into python
 filepath = "./book.txt" 
 out_filepath = "./output.txt"
-word_count = {}
 
-
-#function to remove the punctuations 
 def remove_punctuations(line):
     for character in string.punctuation:
         line = line.replace(character, "")
     return line
 
-#function to remove the numbers
 def remove_numbers(line):
     line = ''.join((x for x in line if not x.isdigit()))
     return line
 
-
-#sorting the dictionary with tuple, then reversing the tuplef to get top to bottom.
 def ordered_dict_by_freq(dictionary):
     sorted_values = []
     for key in dictionary:
@@ -41,35 +23,71 @@ def ordered_dict_by_freq(dictionary):
     sorted_values = sorted_values[::-1]
     return sorted_values
 
+def process_line(line, word_count, lock):
+    line = remove_punctuations(line)
+    line = remove_numbers(line)
+    words = line.split()
 
-#using filepath to access file, removing punctuations, 
-with open(filepath, 'r') as fi:
-    for line in fi:
-        line = remove_punctuations(line)
-        line = remove_numbers(line)
-        words = line.split()
+    # Acquire the lock
+    lock.acquire()
+    try:
+        for word in words:
+            word = word.lower()
+            if word not in word_count:
+                word_count[word] = 0
+            word_count[word] += 1
+    finally:
+        # Release the lock
+        lock.release()
 
-        for words in words:
-            words = words.lower()
-            if words not in word_count:
-                word_count[words] = 0
-            word_count[words] += 1
+def measure_time(num_processes):
+    # Create a manager to create a shared memory space
+    manager = multiprocessing.Manager()
 
-#Output list of top words into output.txt
-#https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
-#refer to the stackoverflow for better understanding of the with block.
+    # Create a shared dictionary using the manager
+    word_count = manager.dict()
 
-top_words = ordered_dict_by_freq(word_count)
-for tuple_freq in top_words:
-    count, word = tuple_freq
-    with open("output.txt", "a") as f:
-        print("{0:30}{1:8d}".format(word, count),file=f)
+    # Create a lock to synchronize access to the shared dictionary
+    lock = manager.Lock()
+
+    # Record the start time
+    start_time = time.time()
+
+    # Create a pool of worker processes
+    with multiprocessing.Pool(num_processes) as pool:
+        # Open the input file in read mode
+        with open(filepath, 'r') as fi:
+            # Process the lines in the file in parallel using the worker processes
+            pool.starmap(process_line, [(line, word_count, lock) for line in fi])
+
+    # Record the end time
+    end_time = time.time()
+
+    # Sort the word count dictionary by frequency
+    sorted_word_count = ordered_dict_by_freq(word_count)
+
+    # Write the sorted word count dictionary to the output file
+    with open(out_filepath, 'w') as fo:
+        for item in sorted_word_count:
+            fo.write("{:<30}{:>8}\n".format(item[1], item[0]))
+
+    #Return the time taken to execute the script
+    return end_time - start_time
 
 
-#Other team members can work here - Sohail>>> 
-#You guys can start adding your code, we need to figure out multi-threading/processing
-#implement a way to then measure the time taken for the program to run for each specification.
-#-Sohail Ahmad 11/27/2022
+    # Measure the time taken to execute the script using 1 process
+    time_1_process = measure_time(1)
+    print("Time taken with 1 process: {:.2f} seconds".format(time_1_process))
+
+    # Measure the time taken to execute the script using 2 processes
+    time_2_processes = measure_time(2)
+    print("Time taken with 2 processes: {:.2f} seconds".format(time_2_processes))
 
 
+    # Measure the time taken to execute the script using 4 processes
+    time_4_processes = measure_time(4)
+    print("Time taken with 4 processes: {:.2f} seconds".format(time_4_processes))
 
+    # Measure the time taken to execute the script using 8 processes
+    time_8_processes = measure_time(8)
+    print("Time taken with 8 processes: {:.2f} seconds".format(time_8_processes))
