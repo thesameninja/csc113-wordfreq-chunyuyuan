@@ -1,6 +1,7 @@
 # csc113-wordfreq-chunyuyuan
-'thesameninja'  = Sohail Ahmad
-'art1029384756' = Arthur Fong
+* 'thesameninja'  = Sohail Ahmad
+* 'art1029384756' = Arthur Fong
+* 'SheroKa'       = Shirwan Kanj
 
 INSTRUCTIONS:
 
