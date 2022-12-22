@@ -4,12 +4,12 @@ import time
 
 filepath = "./book.txt" 
 out_filepath = "./output.txt"
-
+#removes the punctuations in the text using built in python string class
 def remove_punctuations(line):
     for character in string.punctuation:
         line = line.replace(character, "")
     return line
-
+#removes numbers from the text
 def remove_numbers(line):
     line = ''.join((x for x in line if not x.isdigit()))
     return line
@@ -74,19 +74,34 @@ def measure_time(num_processes):
     #Return the time taken to execute the script
     return end_time - start_time
 
-
+if __name__ == '__main__':
     # Measure the time taken to execute the script using 1 process
     time_1_process = measure_time(1)
-    print("Time taken with 1 process: {:.2f} seconds".format(time_1_process))
+    print("Time taken with 1 processes: {:.2f} seconds".format(time_1_process))
 
     # Measure the time taken to execute the script using 2 processes
     time_2_processes = measure_time(2)
     print("Time taken with 2 processes: {:.2f} seconds".format(time_2_processes))
 
+    # Measure the time taken to execute the script using 3 processes
+    time_3_processes = measure_time(3)
+    print("Time taken with 3 processes: {:.2f} seconds".format(time_3_processes))
 
     # Measure the time taken to execute the script using 4 processes
     time_4_processes = measure_time(4)
     print("Time taken with 4 processes: {:.2f} seconds".format(time_4_processes))
+
+     # Measure the time taken to execute the script using 5 processes
+    time_5_processes = measure_time(5)
+    print("Time taken with 5 processes: {:.2f} seconds".format(time_5_processes))
+
+     # Measure the time taken to execute the script using 5 processes
+    time_6_processes = measure_time(6)
+    print("Time taken with 6 processes: {:.2f} seconds".format(time_6_processes))
+
+     # Measure the time taken to execute the script using 7 processes
+    time_7_processes = measure_time(7)
+    print("Time taken with 7 processes: {:.2f} seconds".format(time_7_processes))
 
     # Measure the time taken to execute the script using 8 processes
     time_8_processes = measure_time(8)

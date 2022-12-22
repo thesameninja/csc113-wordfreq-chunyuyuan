@@ -2519,7 +2519,7 @@ accessible                           2
 accept                               2
 absent                               2
 absence                              2
-﻿the                                 1
+﻿the                               1
 zzip                                 1
 zigzagging                           1
 zest                                 1
@@ -3445,7 +3445,7 @@ remains                              1
 reluctantly                          1
 reluctant                            1
 relishthis                           1
-reliquiæ                             1
+reliqui�                            1
 relied                               1
 relics                               1
 released                             1
