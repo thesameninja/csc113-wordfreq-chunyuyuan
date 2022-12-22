@@ -1,6 +1,6 @@
 # csc113-wordfreq-chunyuyuan
-'thesameninja' = Sohail Ahmad
-
+'thesameninja'  = Sohail Ahmad
+'art1029384756' = Arthur Fong
 
 INSTRUCTIONS:
 
